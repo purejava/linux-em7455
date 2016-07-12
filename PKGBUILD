@@ -52,6 +52,10 @@ prepare() {
   # remove this when a Kconfig knob is made available by upstream
   # (relevant patch sent upstream: https://lkml.org/lkml/2011/7/26/227)
   patch -p1 -i "${srcdir}/change-default-console-loglevel.patch"
+  
+  # fix initialization of EM7455 and MC7455 modems
+  cd "${srcdir}/${_srcname}"
+  patch -p1 -i "${srcdir}/EM7455-and-MC7455.patch"
 
   if [ "${CARCH}" = "x86_64" ]; then
     cat "${srcdir}/config.x86_64" > ./.config
